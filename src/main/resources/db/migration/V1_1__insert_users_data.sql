@@ -1,0 +1,2 @@
+# Usuario: renato@example.com / Senha: MinhaSenhaSegura123
+insert into healthcare_api.Users values('1', 'renato@example.com', '$2b$12$IW3Dqb9s/XipMi70ef78E.kv3DgwsRI8jKwDTqE0zuz/biKuI7F8y', 'ADMIN', 'ATIVO', null, null, null, false, null, '2025-02-28 12:14:42', '2025-02-28 12:14:42');
