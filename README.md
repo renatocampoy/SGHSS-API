@@ -1,104 +1,119 @@
 # SGHSS API - Sistema de Gestão Hospitalar e de Serviços de Saúde
 
-## 📌 Sobre
-A **SGHSS API** é um sistema de gestão hospitalar que fornece funcionalidades para **cadastro de pacientes**, **agendamentos**, **telemedicina**, **prontuários eletrônicos** e **auditoria**. Segue padrões de segurança e compliance com a **LGPD**.
+## Descrição
+API para gestão de hospitais, clínicas e serviços de saúde. Fornece funcionalidades para cadastro de pacientes, agendamentos, telemedicina, prontuários eletrônicos e auditoria. Segue padrões de segurança e compliance com a LGPD.
 
-## 🚀 Tecnologias Utilizadas
-- **Java 17**
-- **Spring Boot 3.1**
-- **Spring Security com JWT**
-- **Banco de Dados MySQL**
-- **Swagger OpenAPI 3.1**
+## Informações do Contato
+- **Nome:** Renato Campoy
+- **Site:** [campoy.eng.br](https://campoy.eng.br)
+- **E-mail:** renato@campoy.eng.br
 
-## 🌎 Servidores
-| Ambiente        | URL |
-|----------------|---------------------------------|
-| Desenvolvimento | `http://localhost:8088/api`   |
-| Produção       | `https://sghss-api-prod.com/api` |
+## Licença
+Esta API está licenciada sob a [Licença MIT](https://opensource.org/licenses/MIT).
 
-## 📖 Módulos da API
+## Servidores
+- **Desenvolvimento:** `http://localhost:8088/api`
+- **Produção:** `https://sghss-api-prod.com/api`
 
-### 🏥 **Unidades de Serviço** (`/service-units`)
-- **POST** `/service-units` → Criar uma unidade de serviço
-- **GET** `/service-units` → Listar todas as unidades de serviço
-- **GET** `/service-units/{id}` → Buscar unidade de serviço por ID
-- **PUT** `/service-units/{id}` → Atualizar unidade de serviço
-- **DELETE** `/service-units/{id}` → Excluir unidade de serviço
+## Autenticação
+A API utiliza autenticação via **JWT Bearer Token**. Para acessar endpoints protegidos, inclua o token no cabeçalho:
 
-### 🛏️ **Quartos Hospitalares** (`/rooms`)
-- **POST** `/rooms` → Criar um quarto
-- **GET** `/rooms` → Listar todos os quartos
-- **GET** `/rooms/{id}` → Buscar quarto por ID
-- **PUT** `/rooms/{id}` → Atualizar um quarto
-- **DELETE** `/rooms/{id}` → Excluir um quarto
-- **GET** `/rooms/service-unit/{serviceUnitId}` → Listar quartos por unidade de serviço
+```http
+Authorization: Bearer <seu_token_jwt>
+```
 
-### 🏨 **Ocupação de Quartos** (`/rooms-occupancy`)
-- **POST** `/rooms-occupancy` → Registrar ocupação de quarto
-- **PATCH** `/rooms-occupancy/{id}/release` → Liberar um quarto
-- **GET** `/rooms-occupancy/{id}` → Buscar ocupação por ID
-- **GET** `/rooms-occupancy/room/{roomId}` → Listar ocupações por quarto
-- **GET** `/rooms-occupancy/patient/{patientId}` → Listar ocupações por paciente
+## Endpoints Principais
 
-### 👨‍⚕️ **Profissionais de Saúde** (`/professionals`)
-- **POST** `/professionals` → Criar um profissional de saúde
-- **GET** `/professionals` → Listar todos os profissionais de saúde
-- **GET** `/professionals/{id}` → Buscar profissional por ID
-- **PUT** `/professionals/{id}` → Atualizar profissional de saúde
-- **DELETE** `/professionals/{id}` → Excluir profissional de saúde
+### Usuários
+- **`GET /users/{id}`** - Buscar usuário por ID
+- **`PUT /users/{id}`** - Atualizar dados do usuário
+- **`DELETE /users/{id}`** - Excluir usuário
+- **`GET /users`** - Listar todos os usuários
+- **`POST /users`** - Criar um novo usuário
 
-### 🏥 **Internações Hospitalares** (`/hospitalizations`)
-- **POST** `/hospitalizations` → Registrar uma internação
-- **PUT** `/hospitalizations/{id}` → Atualizar uma internação
-- **PATCH** `/hospitalizations/{id}/discharge` → Dar alta a um paciente
-- **DELETE** `/hospitalizations/{id}` → Cancelar uma internação
+### Teleatendimento
+- **`POST /teleservice`** - Criar um teleatendimento
+- **`PUT /teleservice/{id}/status`** - Atualizar status do teleatendimento
+- **`GET /teleservice/{id}`** - Buscar teleatendimento por ID
+- **`DELETE /teleservice/{id}`** - Cancelar teleatendimento
+- **`GET /teleservice/professional/{professionalId}`** - Listar teleatendimentos por profissional
+- **`GET /teleservice/patient/{patientId}`** - Listar teleatendimentos por paciente
+- **`GET /teleservice/date-range`** - Listar teleatendimentos por período
 
-### 📄 **Relatórios de Internação** (`/hospitalization-reports`)
-- **POST** `/hospitalization-reports` → Criar um relatório de internação
-- **GET** `/hospitalization-reports/{id}` → Buscar relatório por ID
-- **GET** `/hospitalization-reports/hospitalization/{hospitalizationId}` → Listar relatórios por internação
-- **GET** `/hospitalization-reports/date-range?start=YYYY-MM-DD&end=YYYY-MM-DD` → Listar relatórios por período
-- **PUT** `/hospitalization-reports/{id}` → Atualizar relatório
-- **DELETE** `/hospitalization-reports/{id}` → Excluir relatório
+### Pacientes
+- **`GET /patients/{id}`** - Buscar paciente por ID
+- **`PUT /patients/{id}`** - Atualizar paciente
+- **`DELETE /patients/{id}`** - Excluir paciente
+- **`GET /patients`** - Listar todos os pacientes
+- **`POST /patients`** - Criar um paciente
 
-### 💊 **Prescrições Médicas** (`/medical-prescriptions`)
-- **POST** `/medical-prescriptions` → Criar uma prescrição médica
-- **GET** `/medical-prescriptions/consultation/{consultationId}` → Listar prescrições por consulta
+### Profissionais de Saúde
+- **`GET /professionals/{id}`** - Buscar profissional de saúde por ID
+- **`PUT /professionals/{id}`** - Atualizar profissional de saúde
+- **`DELETE /professionals/{id}`** - Excluir profissional de saúde
+- **`GET /professionals`** - Listar todos os profissionais de saúde
+- **`POST /professionals`** - Criar um profissional de saúde
 
-### 📋 **Consultas Médicas** (`/medical-consultations`)
-- **POST** `/medical-consultations` → Criar uma consulta médica
-- **GET** `/medical-consultations` → Listar todas as consultas
-- **GET** `/medical-consultations/{id}` → Buscar consulta por ID
-- **PUT** `/medical-consultations/{id}` → Atualizar consulta médica
-- **DELETE** `/medical-consultations/{id}` → Cancelar consulta médica
-- **GET** `/medical-consultations/patient/{patientId}` → Listar consultas por paciente
-- **GET** `/medical-consultations/professional/{professionalId}` → Listar consultas por profissional
+### Consultas Médicas
+- **`GET /medical-consultations/{id}`** - Buscar consulta médica por ID
+- **`PUT /medical-consultations/{id}`** - Atualizar consulta médica
+- **`DELETE /medical-consultations/{id}`** - Cancelar consulta médica
+- **`GET /medical-consultations`** - Listar todas as consultas médicas
+- **`POST /medical-consultations`** - Criar uma consulta médica
 
-### 👨‍💼 **Usuários** (`/users`)
-- **GET** `/users` → Listar todos os usuários
-- **GET** `/users/{id}` → Buscar usuário por ID
-- **PUT** `/users/{id}` → Atualizar usuário
-- **DELETE** `/users/{id}` → Excluir usuário
+### Prescrições Médicas
+- **`POST /medical-prescriptions`** - Criar uma prescrição médica
+- **`GET /medical-prescriptions/consultation/{consultationId}`** - Listar prescrições por consulta
 
-### 🎭 **Papéis (Roles) e Permissões** (`/roles`, `/permissions`)
-- **POST** `/roles` → Criar um papel (role)
-- **GET** `/roles` → Listar todos os papéis
-- **DELETE** `/roles/{id}` → Excluir um papel
-- **POST** `/permissions` → Criar uma permissão
-- **GET** `/permissions` → Listar todas as permissões
-- **DELETE** `/permissions/{id}` → Excluir uma permissão
+### Internações Hospitalares
+- **`PUT /hospitalizations/{id}`** - Atualizar internação
+- **`DELETE /hospitalizations/{id}`** - Cancelar internação
+- **`POST /hospitalizations`** - Registrar uma internação
+- **`PATCH /hospitalizations/{id}/discharge`** - Dar alta a um paciente internado
 
-### 🔑 **Autenticação** (`/auth`)
-- **POST** `/auth/token` → Gerar token JWT
+### Relatórios de Internação
+- **`GET /hospitalization-reports/{id}`** - Buscar relatório de internação por ID
+- **`PUT /hospitalization-reports/{id}`** - Atualizar relatório de internação
+- **`DELETE /hospitalization-reports/{id}`** - Excluir relatório de internação
+- **`POST /hospitalization-reports`** - Criar um relatório de internação
+- **`GET /hospitalization-reports/hospitalization/{hospitalizationId}`** - Listar relatórios por internação
+- **`GET /hospitalization-reports/date-range`** - Listar relatórios por intervalo de datas
 
-### 📜 **Auditoria do Sistema** (`/system-audit`)
-- **GET** `/system-audit` → Listar todas as auditorias
-- **POST** `/system-audit` → Criar uma entrada de auditoria
+### Auditoria do Sistema
+- **`GET /system-audit`** - Listar todas as entradas de auditoria
+- **`POST /system-audit`** - Criar uma entrada de auditoria
+- **`GET /system-audit/user/{username}`** - Listar auditorias por usuário
+- **`GET /system-audit/entity/{entityName}`** - Listar auditorias por entidade
 
-### 📩 Contato
-📧 **Desenvolvedor**: Renato Campoy | [renato@campoy.eng.br](mailto:renato@campoy.eng.br)  
-🌍 **Website**: [campoy.eng.br](https://campoy.eng.br)
+### Estoque
+- **`GET /stock/{id}`** - Buscar estoque por ID
+- **`PUT /stock/{id}`** - Atualizar estoque
+- **`DELETE /stock/{id}`** - Excluir estoque
+- **`GET /stock`** - Listar todos os estoques
+- **`POST /stock`** - Criar um estoque
+- **`GET /stock/service-unit/{serviceUnitId}`** - Listar estoques por unidade de serviço
+
+### Quartos
+- **`GET /rooms/{id}`** - Buscar quarto por ID
+- **`PUT /rooms/{id}`** - Atualizar um quarto
+- **`DELETE /rooms/{id}`** - Excluir um quarto
+- **`GET /rooms`** - Listar todos os quartos
+- **`POST /rooms`** - Criar um quarto
+- **`GET /rooms/service-unit/{serviceUnitId}`** - Listar quartos por unidade de serviço
+
+### Ocupação de Quartos
+- **`GET /rooms-occupancy/{id}`** - Buscar ocupação por ID
+- **`GET /rooms-occupancy/room/{roomId}`** - Listar ocupações por quarto
+- **`GET /rooms-occupancy/patient/{patientId}`** - Listar ocupações por paciente
+- **`POST /rooms-occupancy`** - Registrar ocupação de quarto
+- **`PATCH /rooms-occupancy/{id}/release`** - Liberar um quarto ocupado
+
+### Autenticação
+- **`POST /auth/token`** - Gerar token de autenticação
+
+## Segurança
+Todos os endpoints protegidos exigem um token JWT. O token deve ser enviado no cabeçalho de cada requisição autenticada.
 
 ---
-**Licença MIT** - Esta API é de código aberto e pode ser utilizada conforme os termos da [Licença MIT](https://opensource.org/licenses/MIT).
+Essa documentação fornece uma visão geral dos principais recursos da API SGHSS. Para detalhes adicionais sobre cada endpoint e exemplos de uso, consulte a especificação OpenAPI completa.
 
