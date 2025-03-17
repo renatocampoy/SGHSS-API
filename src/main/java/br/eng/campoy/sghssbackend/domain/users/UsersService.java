@@ -2,6 +2,7 @@ package br.eng.campoy.sghssbackend.domain.users;
 
 import br.eng.campoy.sghssbackend.domain.users.ValueObject.Status;
 import br.eng.campoy.sghssbackend.domain.users.dto.UsersDto;
+import br.eng.campoy.sghssbackend.domain.users.dto.UsersResponseDto;
 import br.eng.campoy.sghssbackend.domain.users.exception.UsersException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsersService {
@@ -23,7 +25,7 @@ public class UsersService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UsersEntity createUser(UsersDto dto) {
+    public UsersResponseDto createUser(UsersDto dto) {
         if (usersRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new UsersException("E-mail já está em uso.");
         }
@@ -36,12 +38,14 @@ public class UsersService {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
 
-        return usersRepository.save(user);
+        UsersEntity savedUser = usersRepository.save(user);
+
+        return convertToDto(savedUser);
     }
 
-    public UsersEntity updateUser(Long id, UsersDto dto) {
+    public UsersResponseDto updateUser(Long id, UsersDto dto) {
         UsersEntity user = usersRepository.findById(id)
-                .orElseThrow(() -> new br.eng.campoy.sghssbackend.domain.users.exception.UsersException("Usuário não encontrado com ID: " + id));
+                .orElseThrow(() -> new UsersException("Usuário não encontrado com ID: " + id));
 
         user.setEmail(dto.getEmail());
         if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
@@ -51,7 +55,9 @@ public class UsersService {
         user.setStatus(dto.getStatus());
         user.setUpdatedAt(LocalDateTime.now());
 
-        return usersRepository.save(user);
+        UsersEntity updatedUser = usersRepository.save(user);
+
+        return convertToDto(updatedUser);
     }
 
     public void deleteUser(Long id) {
@@ -62,11 +68,24 @@ public class UsersService {
         usersRepository.save(user);
     }
 
-    public Optional<UsersEntity> getUserById(Long id) {
-        return usersRepository.findById(id);
+    public Optional<UsersResponseDto> getUserById(Long id) {
+        return usersRepository.findById(id).map(this::convertToDto);
     }
 
-    public List<UsersEntity> listUsers() {
-        return usersRepository.findAll();
+    public List<UsersResponseDto> listUsers() {
+        return usersRepository.findAll().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    private UsersResponseDto convertToDto(UsersEntity entity) {
+        return new UsersResponseDto(
+                entity.getId(),
+                entity.getEmail(),
+                entity.getRole(),
+                entity.getStatus(),
+                entity.getCreatedAt(),
+                entity.getUpdatedAt()
+        );
     }
 }

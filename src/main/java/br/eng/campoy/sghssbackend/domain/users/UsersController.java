@@ -1,6 +1,7 @@
 package br.eng.campoy.sghssbackend.domain.users;
 
 import br.eng.campoy.sghssbackend.domain.users.dto.UsersDto;
+import br.eng.campoy.sghssbackend.domain.users.dto.UsersResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,14 +21,14 @@ public class UsersController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<UsersEntity> createUser(@RequestBody UsersDto dto) {
-        UsersEntity user = usersService.createUser(dto);
+    public ResponseEntity<UsersResponseDto> createUser(@RequestBody UsersDto dto) {
+        UsersResponseDto user = usersService.createUser(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or (hasRole('PROFISSIONAL') and principal.id == #id)")
-    public ResponseEntity<UsersEntity> getUserById(@PathVariable Long id) {
+    public ResponseEntity<UsersResponseDto> getUserById(@PathVariable Long id) {
         return usersService.getUserById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -35,8 +36,8 @@ public class UsersController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN') or (hasRole('PROFISSIONAL') and principal.id == #id)")
-    public ResponseEntity<UsersEntity> updateUser(@PathVariable Long id, @RequestBody UsersDto dto) {
-        UsersEntity updatedUser = usersService.updateUser(id, dto);
+    public ResponseEntity<UsersResponseDto> updateUser(@PathVariable Long id, @RequestBody UsersDto dto) {
+        UsersResponseDto updatedUser = usersService.updateUser(id, dto);
         return ResponseEntity.ok(updatedUser);
     }
 
@@ -49,7 +50,7 @@ public class UsersController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<List<UsersEntity>> listUsers() {
+    public ResponseEntity<List<UsersResponseDto>> listUsers() {
         return ResponseEntity.ok(usersService.listUsers());
     }
 }
