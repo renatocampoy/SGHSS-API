@@ -17,8 +17,8 @@ public class AuthenticationService {
         this.jwtService = jwtService;
     }
 
-    public ResponseEntity<AuhtenticationData> authenticate(Authentication authentication) {
-        AuhtenticationData returnData = new AuhtenticationData(
+    public ResponseEntity<AuthenticationData> authenticate(Authentication authentication) {
+        AuthenticationData returnData = new AuthenticationData(
                 jwtService.generateToken(authentication),
                 Instant.now().plusSeconds(3600L)
         );
