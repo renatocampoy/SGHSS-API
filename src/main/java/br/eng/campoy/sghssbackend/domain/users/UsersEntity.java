@@ -3,25 +3,23 @@ package br.eng.campoy.sghssbackend.domain.users;
 import br.eng.campoy.sghssbackend.domain.users.ValueObject.Role;
 import br.eng.campoy.sghssbackend.domain.users.ValueObject.Status;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "Users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "Users")
 public class UsersEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -31,17 +29,19 @@ public class UsersEntity {
     @Column(nullable = false)
     private Role role;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime updated_at = LocalDateTime.now();
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
 
-    public UsersEntity(Long userId) {
-        this.id = userId;
-    }
+    private LocalDateTime lastLogin;
+    private String passwordResetToken;
+    private LocalDateTime passwordResetExpires;
+    private Boolean twoFactorEnabled = false;
+    private Integer failedLoginAttempts = 0;
+
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime updatedAt;
 }

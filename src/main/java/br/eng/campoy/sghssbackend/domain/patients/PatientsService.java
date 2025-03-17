@@ -6,6 +6,9 @@ import br.eng.campoy.sghssbackend.domain.users.UsersEntity;
 import br.eng.campoy.sghssbackend.domain.users.UsersRepository;
 import br.eng.campoy.sghssbackend.domain.users.dto.UsersPatientsDto;
 import br.eng.campoy.sghssbackend.exceptions.PatientsException;
+import br.eng.campoy.sghssbackend.types.Age;
+import br.eng.campoy.sghssbackend.types.Cpf;
+import br.eng.campoy.sghssbackend.types.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -32,14 +35,14 @@ public class PatientsService {
 
         PatientsEntity patient = new PatientsEntity();
         patient.setName(dto.getName());
-        patient.setCpf(dto.getCpf());
-        patient.setBirthDate(dto.getBirthDate());
+        patient.setCpf(new Cpf(dto.getCpf()));
+        patient.setBirthDate(new Age(dto.getBirthDate()));
         patient.setAddress(dto.getAddress());
         patient.setNumber(dto.getNumber());
         patient.setCity(dto.getCity());
         patient.setState(dto.getState());
         patient.setCountry(dto.getCountry());
-        patient.setEmail(dto.getEmail());
+        patient.setEmail(new Email(dto.getEmail()));
         patient.setPhone(dto.getPhone());
         patient.setPhoneContact(dto.getPhoneContact());
         patient.setMobile(dto.getMobile());
@@ -52,7 +55,7 @@ public class PatientsService {
 
         return new UsersPatientsDto(
                 user.getId(),
-                user.getEmail(),
+                new Email(user.getEmail()),
                 savedPatient.getName(),
                 savedPatient.getBirthDate(),
                 savedPatient.getCpf(),
@@ -73,14 +76,14 @@ public class PatientsService {
                 .orElseThrow(() -> new PatientsException("Paciente não encontrado com ID: " + id, HttpStatus.NOT_FOUND));
 
         patient.setName(dto.getName());
-        patient.setCpf(dto.getCpf());
-        patient.setBirthDate(dto.getBirthDate());
+        patient.setCpf(new Cpf(dto.getCpf()));
+        patient.setBirthDate(new Age(dto.getBirthDate()));
         patient.setAddress(dto.getAddress());
         patient.setNumber(dto.getNumber());
         patient.setCity(dto.getCity());
         patient.setState(dto.getState());
         patient.setCountry(dto.getCountry());
-        patient.setEmail(dto.getEmail());
+        patient.setEmail(new Email(dto.getEmail()));
         patient.setPhone(dto.getPhone());
         patient.setPhoneContact(dto.getPhoneContact());
         patient.setMobile(dto.getMobile());
@@ -91,7 +94,7 @@ public class PatientsService {
 
         return new UsersPatientsDto(
                 updatedPatient.getUser().getId(),
-                updatedPatient.getUser().getEmail(),
+                new Email(updatedPatient.getUser().getEmail()),
                 updatedPatient.getName(),
                 updatedPatient.getBirthDate(),
                 updatedPatient.getCpf(),
@@ -121,7 +124,7 @@ public class PatientsService {
         return patientsRepository.findAll().stream()
                 .map(patient -> new UsersPatientsDto(
                         patient.getUser().getId(),
-                        patient.getUser().getEmail(),
+                        new Email(patient.getUser().getEmail()),
                         patient.getName(),
                         patient.getBirthDate(),
                         patient.getCpf(),
@@ -144,7 +147,7 @@ public class PatientsService {
 
         return new UsersPatientsDto(
                 patient.getUser().getId(),
-                patient.getUser().getEmail(),
+                new Email(patient.getUser().getEmail()),
                 patient.getName(),
                 patient.getBirthDate(),
                 patient.getCpf(),

@@ -1,6 +1,5 @@
 package br.eng.campoy.sghssbackend.domain.patients.dto;
 
-import br.eng.campoy.sghssbackend.domain.patients.ValueObject.Status;
 import lombok.Data;
 
 @Data

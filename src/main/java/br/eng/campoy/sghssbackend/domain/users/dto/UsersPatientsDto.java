@@ -1,13 +1,16 @@
 package br.eng.campoy.sghssbackend.domain.users.dto;
 
 import br.eng.campoy.sghssbackend.domain.patients.ValueObject.Status;
+import br.eng.campoy.sghssbackend.types.Age;
+import br.eng.campoy.sghssbackend.types.Cpf;
+import br.eng.campoy.sghssbackend.types.Email;
 
 public record UsersPatientsDto(
         Long user_id,
-        String email,
+        Email email,
         String name,
-        String birthDate,
-        String cpf,
+        Age birthDate,
+        Cpf cpf,
         String address,
         String number,
         String city,
