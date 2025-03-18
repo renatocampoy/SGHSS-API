@@ -1,0 +1,11 @@
+# Usa a imagem oficial do MySQL 8
+FROM mysql:8
+
+# Define variáveis de ambiente para configuração do banco de dados
+ENV MYSQL_DATABASE=sghss_db
+ENV MYSQL_USER=sghss_user
+ENV MYSQL_PASSWORD=sghss_password
+ENV MYSQL_ROOT_PASSWORD=root_password
+
+# Expondo a porta padrão do MySQL
+EXPOSE 3306
