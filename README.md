@@ -9,7 +9,7 @@ API para gestão de hospitais, clínicas e serviços de saúde. Fornece funciona
 - **E-mail:** renato@campoy.eng.br
 
 ## Licença
-Esta API está licenciada sob a [Licença MIT](https://opensource.org/licenses/MIT).
+Esta API está licenciada sob a [GNU General Public License v3.0]([https://opensource.org/licenses/MIT](https://github.com/renatocampoy/SGHSS-API/blob/main/LICENSE)).
 
 
 ## 🚀 Como rodar o projeto SGHSS-API
