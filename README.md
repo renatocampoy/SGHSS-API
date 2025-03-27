@@ -11,9 +11,72 @@ API para gestão de hospitais, clínicas e serviços de saúde. Fornece funciona
 ## Licença
 Esta API está licenciada sob a [Licença MIT](https://opensource.org/licenses/MIT).
 
-## Servidores
-- **Desenvolvimento:** `http://localhost:8088/api`
-- **Produção:** `https://sghss-api-prod.com/api`
+
+## 🚀 Como rodar o projeto SGHSS-API
+
+Este projeto é uma API REST desenvolvida com Java 17, Spring Boot 3.1, Spring Security com JWT, Banco de Dados MySQL e documentação Swagger OpenAPI 3.1.
+
+
+## 🛠️ Pré-requisitos
+
+Certifique-se que os seguintes itens estejam instalados:
+	•	Java Development Kit (JDK) 17+
+	•	Docker
+	•	Docker Compose
+	•	Git
+
+
+## 📥 Clone o repositório
+
+git clone https://github.com/renatocampoy/SGHSS-API.git
+
+Navegue até o diretório clonado:
+
+cd SGHSS-API
+
+
+
+⸻
+
+## 📦 Executando o Banco de Dados com Docker Compose
+
+Inicie os containers necessários (banco MySQL):
+
+docker-compose up -d
+
+Este comando inicializa o banco de dados MySQL em segundo plano usando Docker.
+
+## 🚧 Compilando e Executando o Projeto
+
+Execute o comando abaixo para compilar o projeto utilizando Maven Wrapper:
+
+./mvnw clean install
+
+Após a compilação, inicie a aplicação com o seguinte comando:
+
+./mvnw spring-boot:run
+
+
+## 🔗 Acessando a API
+
+Após execução bem-sucedida, a API estará disponível no endereço:
+
+http://localhost:8088/api
+
+Você pode acessar também a documentação Swagger (se configurada):
+
+http://localhost:8088/swagger-ui/index.html
+
+
+
+
+## 📌 Notas adicionais
+	•	Verifique se as portas definidas no projeto (por padrão 8088) estão liberadas no seu sistema.
+	•	Caso encontre problemas com versões ou dependências, confira o arquivo pom.xml e as instruções adicionais no repositório.
+
+
+✅ Agora, o projeto SGHSS-API deverá estar rodando localmente em seu ambiente!
+
 
 ## Autenticação
 A API utiliza autenticação via **JWT Bearer Token**. Para acessar endpoints protegidos, inclua o token no cabeçalho:
