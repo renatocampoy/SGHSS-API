@@ -14,11 +14,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MedicalPrescriptionService {
+public class MedicalPrescription {
 
     private final MedicalPrescriptionRepository medicalPrescriptionRepository;
     private final MedicalConsultationsRepository medicalConsultationsRepository;
@@ -26,10 +25,10 @@ public class MedicalPrescriptionService {
     private final PatientsRepository patientsRepository;
 
     @Autowired
-    public MedicalPrescriptionService(MedicalPrescriptionRepository medicalPrescriptionRepository,
-                                      MedicalConsultationsRepository medicalConsultationsRepository,
-                                      ProfessionalsRepository professionalsRepository,
-                                      PatientsRepository patientsRepository) {
+    public MedicalPrescription(MedicalPrescriptionRepository medicalPrescriptionRepository,
+                               MedicalConsultationsRepository medicalConsultationsRepository,
+                               ProfessionalsRepository professionalsRepository,
+                               PatientsRepository patientsRepository) {
         this.medicalPrescriptionRepository = medicalPrescriptionRepository;
         this.medicalConsultationsRepository = medicalConsultationsRepository;
         this.professionalsRepository = professionalsRepository;

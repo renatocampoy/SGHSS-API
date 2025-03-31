@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Quartos", description = "Gerenciamento de quartos hospitalares disponíveis para ocupação")
 public class RoomsController {
 
-    private final RoomsService roomsService;
+    private final Rooms rooms;
 
-    public RoomsController(RoomsService roomsService) {
-        this.roomsService = roomsService;
+    public RoomsController(Rooms rooms) {
+        this.rooms = rooms;
     }
 
     /**
@@ -47,7 +47,7 @@ public class RoomsController {
             }
     )
     public ResponseEntity<RoomsResponseDto> createRoom(@RequestBody RoomsDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(roomsService.createRoom(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(rooms.createRoom(dto));
     }
 
     /**
@@ -70,7 +70,7 @@ public class RoomsController {
             }
     )
     public ResponseEntity<RoomsResponseDto> updateRoom(@PathVariable Long id, @RequestBody RoomsDto dto) {
-        return ResponseEntity.ok(roomsService.updateRoom(id, dto));
+        return ResponseEntity.ok(rooms.updateRoom(id, dto));
     }
 
     /**
@@ -91,7 +91,7 @@ public class RoomsController {
             }
     )
     public ResponseEntity<Void> deleteRoom(@PathVariable Long id) {
-        roomsService.deleteRoom(id);
+        rooms.deleteRoom(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -112,7 +112,7 @@ public class RoomsController {
             }
     )
     public ResponseEntity<RoomsResponseDto> getRoomById(@PathVariable Long id) {
-        return roomsService.getRoomById(id)
+        return rooms.getRoomById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -132,7 +132,7 @@ public class RoomsController {
             }
     )
     public ResponseEntity<List<RoomsResponseDto>> listRooms() {
-        return ResponseEntity.ok(roomsService.listRooms());
+        return ResponseEntity.ok(rooms.listRooms());
     }
 
     /**
@@ -152,6 +152,6 @@ public class RoomsController {
             }
     )
     public ResponseEntity<List<RoomsResponseDto>> listByServiceUnit(@PathVariable Long serviceUnitId) {
-        return ResponseEntity.ok(roomsService.listByServiceUnit(serviceUnitId));
+        return ResponseEntity.ok(rooms.listByServiceUnit(serviceUnitId));
     }
 }

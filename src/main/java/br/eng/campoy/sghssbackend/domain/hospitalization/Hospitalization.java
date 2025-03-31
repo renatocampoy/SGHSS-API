@@ -21,7 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class HospitalizationService {
+public class Hospitalization {
 
     private final HospitalizationRepository hospitalizationRepository;
     private final PatientsRepository patientsRepository;
@@ -30,7 +30,7 @@ public class HospitalizationService {
     private final RoomsRepository roomsRepository;
 
     @Autowired
-    public HospitalizationService(
+    public Hospitalization(
             HospitalizationRepository hospitalizationRepository,
             PatientsRepository patientsRepository,
             ProfessionalsRepository professionalsRepository,

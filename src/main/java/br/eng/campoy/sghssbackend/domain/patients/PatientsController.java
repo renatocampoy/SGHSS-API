@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Pacientes", description = "Gerenciamento dos pacientes cadastrados no sistema")
 public class PatientsController {
 
-    private final PatientsService patientsService;
+    private final Patients patients;
 
-    public PatientsController(PatientsService patientsService) {
-        this.patientsService = patientsService;
+    public PatientsController(Patients patients) {
+        this.patients = patients;
     }
 
     /**
@@ -47,7 +47,7 @@ public class PatientsController {
             }
     )
     public ResponseEntity<UsersPatientsDto> createPatient(@RequestBody PatientsDto dto) {
-        UsersPatientsDto patient = patientsService.createPatient(dto);
+        UsersPatientsDto patient = patients.createPatient(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(patient);
     }
 
@@ -70,7 +70,7 @@ public class PatientsController {
             }
     )
     public ResponseEntity<UsersPatientsDto> getPatientById(@PathVariable Long id) {
-        UsersPatientsDto patient = patientsService.getPatientById(id);
+        UsersPatientsDto patient = patients.getPatientById(id);
         return ResponseEntity.ok(patient);
     }
 
@@ -94,7 +94,7 @@ public class PatientsController {
             }
     )
     public ResponseEntity<UsersPatientsDto> updatePatient(@PathVariable Long id, @RequestBody PatientsDto dto) {
-        UsersPatientsDto updatedPatient = patientsService.updatePatient(id, dto);
+        UsersPatientsDto updatedPatient = patients.updatePatient(id, dto);
         return ResponseEntity.ok(updatedPatient);
     }
 
@@ -116,7 +116,7 @@ public class PatientsController {
             }
     )
     public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
-        patientsService.deletePatient(id);
+        patients.deletePatient(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -137,7 +137,7 @@ public class PatientsController {
             }
     )
     public ResponseEntity<List<UsersPatientsDto>> listPatients() {
-        List<UsersPatientsDto> patients = patientsService.listPatients();
+        List<UsersPatientsDto> patients = this.patients.listPatients();
         return ResponseEntity.ok(patients);
     }
 }

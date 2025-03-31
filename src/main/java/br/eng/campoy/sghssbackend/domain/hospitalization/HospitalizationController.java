@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Internações Hospitalares", description = "Gerenciamento de internações de pacientes")
 public class HospitalizationController {
 
-    private final HospitalizationService hospitalizationService;
+    private final Hospitalization hospitalization;
 
-    public HospitalizationController(HospitalizationService hospitalizationService) {
-        this.hospitalizationService = hospitalizationService;
+    public HospitalizationController(Hospitalization hospitalization) {
+        this.hospitalization = hospitalization;
     }
 
     /**
@@ -45,7 +45,7 @@ public class HospitalizationController {
             }
     )
     public ResponseEntity<HospitalizationResponseDto> create(@RequestBody HospitalizationDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(hospitalizationService.createHospitalization(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(hospitalization.createHospitalization(dto));
     }
 
     /**
@@ -68,7 +68,7 @@ public class HospitalizationController {
             }
     )
     public ResponseEntity<HospitalizationResponseDto> update(@PathVariable Long id, @RequestBody HospitalizationDto dto) {
-        return ResponseEntity.ok(hospitalizationService.updateHospitalization(id, dto));
+        return ResponseEntity.ok(hospitalization.updateHospitalization(id, dto));
     }
 
     /**
@@ -89,7 +89,7 @@ public class HospitalizationController {
             }
     )
     public ResponseEntity<Void> cancel(@PathVariable Long id) {
-        hospitalizationService.cancelHospitalization(id);
+        hospitalization.cancelHospitalization(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -111,7 +111,7 @@ public class HospitalizationController {
             }
     )
     public ResponseEntity<Void> discharge(@PathVariable Long id) {
-        hospitalizationService.dischargePatient(id);
+        hospitalization.dischargePatient(id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRoleService {
+public class UserRole {
 
     private final UserRoleRepository userRoleRepository;
     private final UsersRepository usersRepository;
     private final RoleRepository roleRepository;
 
     @Autowired
-    public UserRoleService(UserRoleRepository userRoleRepository, UsersRepository usersRepository, RoleRepository roleRepository) {
+    public UserRole(UserRoleRepository userRoleRepository, UsersRepository usersRepository, RoleRepository roleRepository) {
         this.userRoleRepository = userRoleRepository;
         this.usersRepository = usersRepository;
         this.roleRepository = roleRepository;

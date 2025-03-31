@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Especializações Médicas", description = "Gerenciamento de especializações médicas disponíveis no sistema")
 public class MedicalSpecializationController {
 
-    private final MedicalSpecializationService medicalSpecializationService;
+    private final MedicalSpecialization medicalSpecialization;
 
-    public MedicalSpecializationController(MedicalSpecializationService medicalSpecializationService) {
-        this.medicalSpecializationService = medicalSpecializationService;
+    public MedicalSpecializationController(MedicalSpecialization medicalSpecialization) {
+        this.medicalSpecialization = medicalSpecialization;
     }
 
     /**
@@ -47,7 +47,7 @@ public class MedicalSpecializationController {
             }
     )
     public ResponseEntity<MedicalSpecializationResponseDto> createSpecialization(@RequestBody MedicalSpecializationDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(medicalSpecializationService.createSpecialization(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(medicalSpecialization.createSpecialization(dto));
     }
 
     /**
@@ -65,7 +65,7 @@ public class MedicalSpecializationController {
             }
     )
     public ResponseEntity<List<MedicalSpecializationResponseDto>> listAllSpecializations() {
-        return ResponseEntity.ok(medicalSpecializationService.listAllSpecializations());
+        return ResponseEntity.ok(medicalSpecialization.listAllSpecializations());
     }
 
     /**
@@ -85,7 +85,7 @@ public class MedicalSpecializationController {
             }
     )
     public ResponseEntity<MedicalSpecializationResponseDto> getSpecializationById(@PathVariable Long id) {
-        return medicalSpecializationService.getSpecializationById(id)
+        return medicalSpecialization.getSpecializationById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -108,7 +108,7 @@ public class MedicalSpecializationController {
             }
     )
     public ResponseEntity<Void> deleteSpecialization(@PathVariable Long id) {
-        medicalSpecializationService.deleteSpecialization(id);
+        medicalSpecialization.deleteSpecialization(id);
         return ResponseEntity.noContent().build();
     }
 }

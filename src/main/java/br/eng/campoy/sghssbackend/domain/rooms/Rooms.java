@@ -14,13 +14,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class RoomsService {
+public class Rooms {
 
     private final RoomsRepository roomsRepository;
     private final ServiceUnitRepository serviceUnitRepository;
 
     @Autowired
-    public RoomsService(RoomsRepository roomsRepository, ServiceUnitRepository serviceUnitRepository) {
+    public Rooms(RoomsRepository roomsRepository, ServiceUnitRepository serviceUnitRepository) {
         this.roomsRepository = roomsRepository;
         this.serviceUnitRepository = serviceUnitRepository;
     }

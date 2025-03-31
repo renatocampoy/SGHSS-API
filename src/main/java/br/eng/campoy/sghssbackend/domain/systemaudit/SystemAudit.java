@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class SystemAuditService {
+public class SystemAudit {
 
     private final SystemAuditRepository systemAuditRepository;
 
     @Autowired
-    public SystemAuditService(SystemAuditRepository systemAuditRepository) {
+    public SystemAudit(SystemAuditRepository systemAuditRepository) {
         this.systemAuditRepository = systemAuditRepository;
     }
 

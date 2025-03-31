@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "Atribuição de Funções", description = "Gerenciamento da atribuição de funções aos usuários do sistema")
 public class UserRoleController {
 
-    private final UserRoleService userRoleService;
+    private final UserRole userRole;
 
-    public UserRoleController(UserRoleService userRoleService) {
-        this.userRoleService = userRoleService;
+    public UserRoleController(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserRoleController {
             }
     )
     public ResponseEntity<Void> assignRoleToUser(@RequestBody AssignRoleDto dto) {
-        userRoleService.assignRoleToUser(dto);
+        userRole.assignRoleToUser(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

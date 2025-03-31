@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Usuários", description = "Gerenciamento de usuários do sistema")
 public class UsersController {
 
-    private final UsersService usersService;
+    private final Users users;
 
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
+    public UsersController(Users users) {
+        this.users = users;
     }
 
     /**
@@ -47,7 +47,7 @@ public class UsersController {
             }
     )
     public ResponseEntity<UsersResponseDto> createUser(@RequestBody UsersDto dto) {
-        UsersResponseDto user = usersService.createUser(dto);
+        UsersResponseDto user = users.createUser(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
@@ -70,7 +70,7 @@ public class UsersController {
             }
     )
     public ResponseEntity<UsersResponseDto> getUserById(@PathVariable Long id) {
-        return usersService.getUserById(id)
+        return users.getUserById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -95,7 +95,7 @@ public class UsersController {
             }
     )
     public ResponseEntity<UsersResponseDto> updateUser(@PathVariable Long id, @RequestBody UsersDto dto) {
-        UsersResponseDto updatedUser = usersService.updateUser(id, dto);
+        UsersResponseDto updatedUser = users.updateUser(id, dto);
         return ResponseEntity.ok(updatedUser);
     }
 
@@ -117,7 +117,7 @@ public class UsersController {
             }
     )
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        usersService.deleteUser(id);
+        users.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -138,6 +138,6 @@ public class UsersController {
             }
     )
     public ResponseEntity<List<UsersResponseDto>> listUsers() {
-        return ResponseEntity.ok(usersService.listUsers());
+        return ResponseEntity.ok(users.listUsers());
     }
 }

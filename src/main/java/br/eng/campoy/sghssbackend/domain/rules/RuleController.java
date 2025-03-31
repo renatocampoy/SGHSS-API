@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Regras", description = "Gerenciamento de regras de autorização e acesso do sistema")
 public class RuleController {
 
-    private final RuleService ruleService;
+    private final Rule rule;
 
-    public RuleController(RuleService ruleService) {
-        this.ruleService = ruleService;
+    public RuleController(Rule rule) {
+        this.rule = rule;
     }
 
     /**
@@ -45,7 +45,7 @@ public class RuleController {
             }
     )
     public ResponseEntity<RuleResponseDto> createRule(@RequestBody RuleDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(ruleService.createRule(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(rule.createRule(dto));
     }
 
     /**
@@ -63,7 +63,7 @@ public class RuleController {
             }
     )
     public ResponseEntity<List<RuleResponseDto>> listAllRules() {
-        return ResponseEntity.ok(ruleService.listAllRules());
+        return ResponseEntity.ok(rule.listAllRules());
     }
 
     /**
@@ -84,7 +84,7 @@ public class RuleController {
             }
     )
     public ResponseEntity<Void> deleteRule(@PathVariable Long id) {
-        ruleService.deleteRule(id);
+        rule.deleteRule(id);
         return ResponseEntity.noContent().build();
     }
 }

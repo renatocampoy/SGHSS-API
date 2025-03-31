@@ -12,13 +12,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class StockItemsService {
+public class StockItems {
 
     private final StockItemsRepository stockItemsRepository;
     private final StockRepository stockRepository;
 
     @Autowired
-    public StockItemsService(StockItemsRepository stockItemsRepository, StockRepository stockRepository) {
+    public StockItems(StockItemsRepository stockItemsRepository, StockRepository stockRepository) {
         this.stockItemsRepository = stockItemsRepository;
         this.stockRepository = stockRepository;
     }

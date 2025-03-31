@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class TeleserviceService {
+public class Teleservice {
 
     private final TeleserviceRepository teleserviceRepository;
     private final MedicalConsultationsRepository medicalConsultationsRepository;
@@ -27,10 +27,10 @@ public class TeleserviceService {
     private final PatientsRepository patientsRepository;
 
     @Autowired
-    public TeleserviceService(TeleserviceRepository teleserviceRepository,
-                              MedicalConsultationsRepository medicalConsultationsRepository,
-                              ProfessionalsRepository professionalsRepository,
-                              PatientsRepository patientsRepository) {
+    public Teleservice(TeleserviceRepository teleserviceRepository,
+                       MedicalConsultationsRepository medicalConsultationsRepository,
+                       ProfessionalsRepository professionalsRepository,
+                       PatientsRepository patientsRepository) {
         this.teleserviceRepository = teleserviceRepository;
         this.medicalConsultationsRepository = medicalConsultationsRepository;
         this.professionalsRepository = professionalsRepository;

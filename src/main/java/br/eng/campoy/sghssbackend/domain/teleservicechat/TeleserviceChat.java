@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TeleserviceChatService {
+public class TeleserviceChat {
 
     private final TeleserviceChatRepository teleserviceChatRepository;
     private final TeleserviceRepository teleserviceRepository;
 
     @Autowired
-    public TeleserviceChatService(TeleserviceChatRepository teleserviceChatRepository,
-                                  TeleserviceRepository teleserviceRepository) {
+    public TeleserviceChat(TeleserviceChatRepository teleserviceChatRepository,
+                           TeleserviceRepository teleserviceRepository) {
         this.teleserviceChatRepository = teleserviceChatRepository;
         this.teleserviceRepository = teleserviceRepository;
     }

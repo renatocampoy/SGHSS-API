@@ -11,12 +11,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class RuleService {
+public class Rule {
 
     private final RuleRepository ruleRepository;
 
     @Autowired
-    public RuleService(RuleRepository ruleRepository) {
+    public Rule(RuleRepository ruleRepository) {
         this.ruleRepository = ruleRepository;
     }
 

@@ -23,10 +23,10 @@ import java.util.List;
 @Tag(name = "Teleatendimentos", description = "Gerenciamento de teleatendimentos entre profissionais e pacientes")
 public class TeleserviceController {
 
-    private final TeleserviceService teleserviceService;
+    private final Teleservice teleservice;
 
-    public TeleserviceController(TeleserviceService teleserviceService) {
-        this.teleserviceService = teleserviceService;
+    public TeleserviceController(Teleservice teleservice) {
+        this.teleservice = teleservice;
     }
 
     /**
@@ -46,7 +46,7 @@ public class TeleserviceController {
             }
     )
     public ResponseEntity<TeleserviceResponseDto> createTeleservice(@RequestBody TeleserviceDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(teleserviceService.createTeleservice(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(teleservice.createTeleservice(dto));
     }
 
     /**
@@ -66,7 +66,7 @@ public class TeleserviceController {
             }
     )
     public ResponseEntity<TeleserviceResponseDto> getTeleserviceById(@PathVariable Long id) {
-        return teleserviceService.getTeleserviceById(id)
+        return teleservice.getTeleserviceById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -87,7 +87,7 @@ public class TeleserviceController {
             }
     )
     public ResponseEntity<List<TeleserviceResponseDto>> listByPatient(@PathVariable Long patientId) {
-        return ResponseEntity.ok(teleserviceService.listByPatient(patientId));
+        return ResponseEntity.ok(teleservice.listByPatient(patientId));
     }
 
     /**
@@ -106,7 +106,7 @@ public class TeleserviceController {
             }
     )
     public ResponseEntity<List<TeleserviceResponseDto>> listByProfessional(@PathVariable Long professionalId) {
-        return ResponseEntity.ok(teleserviceService.listByProfessional(professionalId));
+        return ResponseEntity.ok(teleservice.listByProfessional(professionalId));
     }
 
     /**
@@ -129,7 +129,7 @@ public class TeleserviceController {
     public ResponseEntity<TeleserviceResponseDto> updateTeleserviceStatus(
             @PathVariable Long id,
             @RequestParam TeleserviceStatus status) {
-        return ResponseEntity.ok(teleserviceService.updateTeleserviceStatus(id, status));
+        return ResponseEntity.ok(teleservice.updateTeleserviceStatus(id, status));
     }
 
     /**
@@ -148,7 +148,7 @@ public class TeleserviceController {
             }
     )
     public ResponseEntity<Void> cancelTeleservice(@PathVariable Long id) {
-        teleserviceService.cancelTeleservice(id);
+        teleservice.cancelTeleservice(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -173,6 +173,6 @@ public class TeleserviceController {
             @RequestParam("end") String end) {
         LocalDateTime startDate = LocalDateTime.parse(start);
         LocalDateTime endDate = LocalDateTime.parse(end);
-        return ResponseEntity.ok(teleserviceService.listByDateRange(startDate, endDate));
+        return ResponseEntity.ok(teleservice.listByDateRange(startDate, endDate));
     }
 }

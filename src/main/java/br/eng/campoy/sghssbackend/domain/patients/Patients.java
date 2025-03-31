@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PatientsService {
+public class Patients {
 
     private final PatientsRepository patientsRepository;
     private final UsersRepository usersRepository;
 
     @Autowired
-    public PatientsService(PatientsRepository patientsRepository, UsersRepository usersRepository) {
+    public Patients(PatientsRepository patientsRepository, UsersRepository usersRepository) {
         this.patientsRepository = patientsRepository;
         this.usersRepository = usersRepository;
     }

@@ -17,16 +17,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ProfessionalsService {
+public class Professionals {
 
     private final ProfessionalsRepository professionalsRepository;
     private final UsersRepository usersRepository;
     private final ServiceUnitRepository serviceUnitRepository;
 
     @Autowired
-    public ProfessionalsService(ProfessionalsRepository professionalsRepository,
-                                UsersRepository usersRepository,
-                                ServiceUnitRepository serviceUnitRepository) {
+    public Professionals(ProfessionalsRepository professionalsRepository,
+                         UsersRepository usersRepository,
+                         ServiceUnitRepository serviceUnitRepository) {
         this.professionalsRepository = professionalsRepository;
         this.usersRepository = usersRepository;
         this.serviceUnitRepository = serviceUnitRepository;

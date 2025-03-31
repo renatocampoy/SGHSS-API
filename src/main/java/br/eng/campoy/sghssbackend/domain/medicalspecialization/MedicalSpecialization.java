@@ -11,12 +11,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MedicalSpecializationService {
+public class MedicalSpecialization {
 
     private final MedicalSpecializationRepository medicalSpecializationRepository;
 
     @Autowired
-    public MedicalSpecializationService(MedicalSpecializationRepository medicalSpecializationRepository) {
+    public MedicalSpecialization(MedicalSpecializationRepository medicalSpecializationRepository) {
         this.medicalSpecializationRepository = medicalSpecializationRepository;
     }
 

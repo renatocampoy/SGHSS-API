@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @Tag(name = "Autenticação", description = "Gerenciamento de autenticação e geração de tokens JWT")
 public class AuthenticationController {
-    private final AuthenticationService authenticationService;
+    private final Authentication authentication;
 
-    public AuthenticationController(AuthenticationService authenticationService) {
-        this.authenticationService = authenticationService;
+    public AuthenticationController(Authentication authentication) {
+        this.authentication = authentication;
     }
 
     /**
@@ -40,7 +39,7 @@ public class AuthenticationController {
                     @ApiResponse(responseCode = "401", description = "Falha na autenticação - credenciais inválidas")
             }
     )
-    public ResponseEntity<AuthenticationData> authenticate(Authentication authentication) {
-        return authenticationService.authenticate(authentication);
+    public ResponseEntity<AuthenticationData> authenticate(org.springframework.security.core.Authentication authentication) {
+        return this.authentication.authenticate(authentication);
     }
 }

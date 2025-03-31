@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Itens do Estoque", description = "Gerenciamento dos itens armazenados no estoque")
 public class StockItemsController {
 
-    private final StockItemsService stockItemsService;
+    private final StockItems stockItems;
 
-    public StockItemsController(StockItemsService stockItemsService) {
-        this.stockItemsService = stockItemsService;
+    public StockItemsController(StockItems stockItems) {
+        this.stockItems = stockItems;
     }
 
     /**
@@ -47,7 +47,7 @@ public class StockItemsController {
             }
     )
     public ResponseEntity<StockItemResponseDto> addStockItem(@RequestBody StockItemDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(stockItemsService.addStockItem(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(stockItems.addStockItem(dto));
     }
 
     /**
@@ -67,7 +67,7 @@ public class StockItemsController {
             }
     )
     public ResponseEntity<StockItemResponseDto> getStockItemById(@PathVariable Long id) {
-        return stockItemsService.getStockItemById(id)
+        return stockItems.getStockItemById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -89,6 +89,6 @@ public class StockItemsController {
             }
     )
     public ResponseEntity<List<StockItemResponseDto>> listStockItems(@PathVariable Long stockId) {
-        return ResponseEntity.ok(stockItemsService.listStockItems(stockId));
+        return ResponseEntity.ok(stockItems.listStockItems(stockId));
     }
 }

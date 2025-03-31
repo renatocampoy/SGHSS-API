@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Permissões", description = "Gerenciamento das permissões de acesso para os usuários do sistema")
 public class PermissionController {
 
-    private final PermissionService permissionService;
+    private final Permission permission;
 
-    public PermissionController(PermissionService permissionService) {
-        this.permissionService = permissionService;
+    public PermissionController(Permission permission) {
+        this.permission = permission;
     }
 
     /**
@@ -47,7 +47,7 @@ public class PermissionController {
             }
     )
     public ResponseEntity<PermissionResponseDto> createPermission(@RequestBody PermissionDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(permissionService.createPermission(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(permission.createPermission(dto));
     }
 
     /**
@@ -67,7 +67,7 @@ public class PermissionController {
             }
     )
     public ResponseEntity<List<PermissionResponseDto>> listAllPermissions() {
-        return ResponseEntity.ok(permissionService.listAllPermissions());
+        return ResponseEntity.ok(permission.listAllPermissions());
     }
 
     /**
@@ -88,7 +88,7 @@ public class PermissionController {
             }
     )
     public ResponseEntity<Void> deletePermission(@PathVariable Long id) {
-        permissionService.deletePermission(id);
+        permission.deletePermission(id);
         return ResponseEntity.noContent().build();
     }
 }

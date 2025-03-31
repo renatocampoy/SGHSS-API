@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Estoque", description = "Gerenciamento de estoques de medicamentos e insumos")
 public class StockController {
 
-    private final StockService stockService;
+    private final Stock stock;
 
-    public StockController(StockService stockService) {
-        this.stockService = stockService;
+    public StockController(Stock stock) {
+        this.stock = stock;
     }
 
     /**
@@ -47,7 +47,7 @@ public class StockController {
             }
     )
     public ResponseEntity<StockResponseDto> createStock(@RequestBody StockDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(stockService.createStock(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(stock.createStock(dto));
     }
 
     /**
@@ -70,7 +70,7 @@ public class StockController {
             }
     )
     public ResponseEntity<StockResponseDto> updateStock(@PathVariable Long id, @RequestBody StockDto dto) {
-        return ResponseEntity.ok(stockService.updateStock(id, dto));
+        return ResponseEntity.ok(stock.updateStock(id, dto));
     }
 
     /**
@@ -91,7 +91,7 @@ public class StockController {
             }
     )
     public ResponseEntity<Void> deleteStock(@PathVariable Long id) {
-        stockService.deleteStock(id);
+        stock.deleteStock(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -112,7 +112,7 @@ public class StockController {
             }
     )
     public ResponseEntity<StockResponseDto> getStockById(@PathVariable Long id) {
-        return stockService.getStockById(id)
+        return stock.getStockById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -132,7 +132,7 @@ public class StockController {
             }
     )
     public ResponseEntity<List<StockResponseDto>> listStock() {
-        return ResponseEntity.ok(stockService.listStock());
+        return ResponseEntity.ok(stock.listStock());
     }
 
     /**
@@ -152,6 +152,6 @@ public class StockController {
             }
     )
     public ResponseEntity<List<StockResponseDto>> listByServiceUnit(@PathVariable Long serviceUnitId) {
-        return ResponseEntity.ok(stockService.listByServiceUnit(serviceUnitId));
+        return ResponseEntity.ok(stock.listByServiceUnit(serviceUnitId));
     }
 }

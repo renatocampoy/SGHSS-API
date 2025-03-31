@@ -12,12 +12,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ServiceUnitService {
+public class ServiceUnit {
 
     private final ServiceUnitRepository serviceUnitRepository;
 
     @Autowired
-    public ServiceUnitService(ServiceUnitRepository serviceUnitRepository) {
+    public ServiceUnit(ServiceUnitRepository serviceUnitRepository) {
         this.serviceUnitRepository = serviceUnitRepository;
     }
 

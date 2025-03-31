@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Ocupação de Quartos", description = "Gerenciamento da ocupação e liberação de quartos no sistema hospitalar")
 public class RoomsOccupancyController {
 
-    private final RoomsOccupancyService roomsOccupancyService;
+    private final RoomsOccupancy roomsOccupancy;
 
-    public RoomsOccupancyController(RoomsOccupancyService roomsOccupancyService) {
-        this.roomsOccupancyService = roomsOccupancyService;
+    public RoomsOccupancyController(RoomsOccupancy roomsOccupancy) {
+        this.roomsOccupancy = roomsOccupancy;
     }
 
     /**
@@ -47,7 +47,7 @@ public class RoomsOccupancyController {
             }
     )
     public ResponseEntity<RoomsOccupancyResponseDto> register(@RequestBody RoomsOccupancyDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(roomsOccupancyService.registerOccupancy(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(roomsOccupancy.registerOccupancy(dto));
     }
 
     /**
@@ -68,7 +68,7 @@ public class RoomsOccupancyController {
             }
     )
     public ResponseEntity<Void> release(@PathVariable Long id) {
-        roomsOccupancyService.releaseRoom(id);
+        roomsOccupancy.releaseRoom(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -91,7 +91,7 @@ public class RoomsOccupancyController {
             }
     )
     public ResponseEntity<RoomsOccupancyResponseDto> getById(@PathVariable Long id) {
-        return roomsOccupancyService.getById(id)
+        return roomsOccupancy.getById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -112,7 +112,7 @@ public class RoomsOccupancyController {
             }
     )
     public ResponseEntity<List<RoomsOccupancyResponseDto>> listAll() {
-        return ResponseEntity.ok(roomsOccupancyService.listAll());
+        return ResponseEntity.ok(roomsOccupancy.listAll());
     }
 
     /**
@@ -134,7 +134,7 @@ public class RoomsOccupancyController {
             }
     )
     public ResponseEntity<List<RoomsOccupancyResponseDto>> listByPatient(@PathVariable Long patientId) {
-        return ResponseEntity.ok(roomsOccupancyService.listByPatient(patientId));
+        return ResponseEntity.ok(roomsOccupancy.listByPatient(patientId));
     }
 
     /**
@@ -156,6 +156,6 @@ public class RoomsOccupancyController {
             }
     )
     public ResponseEntity<List<RoomsOccupancyResponseDto>> listByRoom(@PathVariable Long roomId) {
-        return ResponseEntity.ok(roomsOccupancyService.listByRoom(roomId));
+        return ResponseEntity.ok(roomsOccupancy.listByRoom(roomId));
     }
 }

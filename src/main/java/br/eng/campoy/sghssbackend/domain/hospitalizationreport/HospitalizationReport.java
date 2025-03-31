@@ -16,16 +16,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class HospitalizationReportService {
+public class HospitalizationReport {
 
     private final HospitalizationReportRepository hospitalizationReportRepository;
     private final HospitalizationRepository hospitalizationRepository;
     private final ProfessionalsRepository professionalsRepository;
 
     @Autowired
-    public HospitalizationReportService(HospitalizationReportRepository hospitalizationReportRepository,
-                                        HospitalizationRepository hospitalizationRepository,
-                                        ProfessionalsRepository professionalsRepository) {
+    public HospitalizationReport(HospitalizationReportRepository hospitalizationReportRepository,
+                                 HospitalizationRepository hospitalizationRepository,
+                                 ProfessionalsRepository professionalsRepository) {
         this.hospitalizationReportRepository = hospitalizationReportRepository;
         this.hospitalizationRepository = hospitalizationRepository;
         this.professionalsRepository = professionalsRepository;

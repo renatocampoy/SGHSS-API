@@ -21,10 +21,10 @@ import java.util.List;
 @Tag(name = "Chat do Teleatendimento", description = "Gerenciamento de mensagens no teleatendimento entre profissionais e pacientes")
 public class TeleserviceChatController {
 
-    private final TeleserviceChatService teleserviceChatService;
+    private final TeleserviceChat teleserviceChat;
 
-    public TeleserviceChatController(TeleserviceChatService teleserviceChatService) {
-        this.teleserviceChatService = teleserviceChatService;
+    public TeleserviceChatController(TeleserviceChat teleserviceChat) {
+        this.teleserviceChat = teleserviceChat;
     }
 
     /**
@@ -44,7 +44,7 @@ public class TeleserviceChatController {
             }
     )
     public ResponseEntity<TeleserviceChatResponseDto> sendMessage(@RequestBody TeleserviceChatDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(teleserviceChatService.sendMessage(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(teleserviceChat.sendMessage(dto));
     }
 
     /**
@@ -64,6 +64,6 @@ public class TeleserviceChatController {
             }
     )
     public ResponseEntity<List<TeleserviceChatResponseDto>> listMessages(@PathVariable Long teleserviceId) {
-        return ResponseEntity.ok(teleserviceChatService.listMessages(teleserviceId));
+        return ResponseEntity.ok(teleserviceChat.listMessages(teleserviceId));
     }
 }

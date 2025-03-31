@@ -22,9 +22,9 @@ import java.util.List;
 @Tag(name = "Consultas Médicas", description = "Gerenciamento de consultas médicas realizadas no sistema")
 public class MedicalConsultationsController {
 
-    private final MedicalConsultationsService medicalConsultationService;
+    private final MedicalConsultations medicalConsultationService;
 
-    public MedicalConsultationsController(MedicalConsultationsService medicalConsultationService) {
+    public MedicalConsultationsController(MedicalConsultations medicalConsultationService) {
         this.medicalConsultationService = medicalConsultationService;
     }
 

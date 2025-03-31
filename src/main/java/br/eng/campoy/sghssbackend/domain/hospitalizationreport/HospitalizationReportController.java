@@ -23,10 +23,10 @@ import java.util.List;
 @Tag(name = "Relatórios de Internação", description = "Gerenciamento de relatórios de internação hospitalar")
 public class HospitalizationReportController {
 
-    private final HospitalizationReportService hospitalizationReportService;
+    private final HospitalizationReport hospitalizationReport;
 
-    public HospitalizationReportController(HospitalizationReportService hospitalizationReportService) {
-        this.hospitalizationReportService = hospitalizationReportService;
+    public HospitalizationReportController(HospitalizationReport hospitalizationReport) {
+        this.hospitalizationReport = hospitalizationReport;
     }
 
     /**
@@ -48,7 +48,7 @@ public class HospitalizationReportController {
             }
     )
     public ResponseEntity<HospitalizationReportResponseDto> createReport(@RequestBody HospitalizationReportDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(hospitalizationReportService.createReport(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(hospitalizationReport.createReport(dto));
     }
 
     /**
@@ -69,7 +69,7 @@ public class HospitalizationReportController {
             }
     )
     public ResponseEntity<HospitalizationReportResponseDto> getReportById(@PathVariable Long id) {
-        return hospitalizationReportService.getReportById(id)
+        return hospitalizationReport.getReportById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -92,7 +92,7 @@ public class HospitalizationReportController {
             }
     )
     public ResponseEntity<List<HospitalizationReportResponseDto>> listReportsByHospitalization(@PathVariable Long hospitalizationId) {
-        return ResponseEntity.ok(hospitalizationReportService.listReportsByHospitalization(hospitalizationId));
+        return ResponseEntity.ok(hospitalizationReport.listReportsByHospitalization(hospitalizationId));
     }
 
     /**
@@ -115,7 +115,7 @@ public class HospitalizationReportController {
             }
     )
     public ResponseEntity<HospitalizationReportResponseDto> updateReport(@PathVariable Long id, @RequestBody HospitalizationReportDto dto) {
-        return ResponseEntity.ok(hospitalizationReportService.updateReport(id, dto));
+        return ResponseEntity.ok(hospitalizationReport.updateReport(id, dto));
     }
 
     /**
@@ -136,7 +136,7 @@ public class HospitalizationReportController {
             }
     )
     public ResponseEntity<Void> deleteReport(@PathVariable Long id) {
-        hospitalizationReportService.deleteReport(id);
+        hospitalizationReport.deleteReport(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -163,6 +163,6 @@ public class HospitalizationReportController {
             @RequestParam("end") String end) {
         LocalDateTime startDate = LocalDateTime.parse(start);
         LocalDateTime endDate = LocalDateTime.parse(end);
-        return ResponseEntity.ok(hospitalizationReportService.listReportsByDate(startDate, endDate));
+        return ResponseEntity.ok(hospitalizationReport.listReportsByDate(startDate, endDate));
     }
 }

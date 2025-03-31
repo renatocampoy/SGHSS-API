@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PermissionService {
+public class Permission {
 
     private final PermissionRepository permissionRepository;
 
     @Autowired
-    public PermissionService(PermissionRepository permissionRepository) {
+    public Permission(PermissionRepository permissionRepository) {
         this.permissionRepository = permissionRepository;
     }
 

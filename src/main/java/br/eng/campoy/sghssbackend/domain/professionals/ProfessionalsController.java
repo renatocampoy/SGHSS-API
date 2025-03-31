@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Profissionais de Saúde", description = "Gerenciamento de médicos, enfermeiros e outros profissionais da saúde")
 public class ProfessionalsController {
 
-    private final ProfessionalsService professionalsService;
+    private final Professionals professionals;
 
-    public ProfessionalsController(ProfessionalsService professionalsService) {
-        this.professionalsService = professionalsService;
+    public ProfessionalsController(Professionals professionals) {
+        this.professionals = professionals;
     }
 
     /**
@@ -47,7 +47,7 @@ public class ProfessionalsController {
             }
     )
     public ResponseEntity<ProfessionalsResponseDto> createProfessional(@RequestBody ProfessionalsDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(professionalsService.createProfessional(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(professionals.createProfessional(dto));
     }
 
     /**
@@ -67,7 +67,7 @@ public class ProfessionalsController {
             }
     )
     public ResponseEntity<ProfessionalsResponseDto> getProfessionalById(@PathVariable Long id) {
-        return professionalsService.getProfessionalById(id)
+        return professionals.getProfessionalById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -92,7 +92,7 @@ public class ProfessionalsController {
             }
     )
     public ResponseEntity<ProfessionalsResponseDto> updateProfessional(@PathVariable Long id, @RequestBody ProfessionalsDto dto) {
-        return ResponseEntity.ok(professionalsService.updateProfessional(id, dto));
+        return ResponseEntity.ok(professionals.updateProfessional(id, dto));
     }
 
     /**
@@ -113,7 +113,7 @@ public class ProfessionalsController {
             }
     )
     public ResponseEntity<Void> deleteProfessional(@PathVariable Long id) {
-        professionalsService.deleteProfessional(id);
+        professionals.deleteProfessional(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -132,6 +132,6 @@ public class ProfessionalsController {
             }
     )
     public ResponseEntity<List<ProfessionalsResponseDto>> listProfessionals() {
-        return ResponseEntity.ok(professionalsService.listProfessionals());
+        return ResponseEntity.ok(professionals.listProfessionals());
     }
 }

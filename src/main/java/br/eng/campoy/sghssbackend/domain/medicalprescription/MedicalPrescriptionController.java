@@ -20,10 +20,10 @@ import java.util.List;
 @Tag(name = "Prescrições Médicas", description = "Gerenciamento de prescrições médicas associadas a consultas")
 public class MedicalPrescriptionController {
 
-    private final MedicalPrescriptionService medicalPrescriptionService;
+    private final MedicalPrescription medicalPrescription;
 
-    public MedicalPrescriptionController(MedicalPrescriptionService medicalPrescriptionService) {
-        this.medicalPrescriptionService = medicalPrescriptionService;
+    public MedicalPrescriptionController(MedicalPrescription medicalPrescription) {
+        this.medicalPrescription = medicalPrescription;
     }
 
     /**
@@ -43,7 +43,7 @@ public class MedicalPrescriptionController {
             }
     )
     public ResponseEntity<MedicalPrescriptionResponseDto> createPrescription(@RequestBody MedicalPrescriptionDto dto) {
-        return ResponseEntity.ok(medicalPrescriptionService.createPrescription(dto));
+        return ResponseEntity.ok(medicalPrescription.createPrescription(dto));
     }
 
     /**
@@ -63,6 +63,6 @@ public class MedicalPrescriptionController {
             }
     )
     public ResponseEntity<List<MedicalPrescriptionResponseDto>> listByConsultation(@PathVariable Long consultationId) {
-        return ResponseEntity.ok(medicalPrescriptionService.listByConsultation(consultationId));
+        return ResponseEntity.ok(medicalPrescription.listByConsultation(consultationId));
     }
 }

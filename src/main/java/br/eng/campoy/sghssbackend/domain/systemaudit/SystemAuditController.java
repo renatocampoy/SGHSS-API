@@ -22,10 +22,10 @@ import java.util.List;
 @Tag(name = "Auditoria do Sistema", description = "Gerenciamento de logs de auditoria para rastreamento de eventos no sistema")
 public class SystemAuditController {
 
-    private final SystemAuditService systemAuditService;
+    private final SystemAudit systemAudit;
 
-    public SystemAuditController(SystemAuditService systemAuditService) {
-        this.systemAuditService = systemAuditService;
+    public SystemAuditController(SystemAudit systemAudit) {
+        this.systemAudit = systemAudit;
     }
 
     /**
@@ -47,7 +47,7 @@ public class SystemAuditController {
             }
     )
     public ResponseEntity<SystemAuditResponseDto> createAuditEntry(@RequestBody SystemAuditDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(systemAuditService.createAuditEntry(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(systemAudit.createAuditEntry(dto));
     }
 
     /**
@@ -67,7 +67,7 @@ public class SystemAuditController {
             }
     )
     public ResponseEntity<List<SystemAuditResponseDto>> listAllAudits() {
-        return ResponseEntity.ok(systemAuditService.listAllAudits());
+        return ResponseEntity.ok(systemAudit.listAllAudits());
     }
 
     /**
@@ -89,7 +89,7 @@ public class SystemAuditController {
             }
     )
     public ResponseEntity<List<SystemAuditResponseDto>> listAuditsByUser(@PathVariable String username) {
-        return ResponseEntity.ok(systemAuditService.listAuditsByUser(username));
+        return ResponseEntity.ok(systemAudit.listAuditsByUser(username));
     }
 
     /**
@@ -111,6 +111,6 @@ public class SystemAuditController {
             }
     )
     public ResponseEntity<List<SystemAuditResponseDto>> listAuditsByEntity(@PathVariable String entityName) {
-        return ResponseEntity.ok(systemAuditService.listAuditsByEntity(entityName));
+        return ResponseEntity.ok(systemAudit.listAuditsByEntity(entityName));
     }
 }

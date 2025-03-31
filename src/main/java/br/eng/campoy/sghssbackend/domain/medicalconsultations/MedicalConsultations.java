@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class MedicalConsultationsService {
+public class MedicalConsultations {
 
     private final MedicalConsultationsRepository medicalConsultationRepository;
     private final PatientsRepository patientsRepository;
@@ -27,7 +27,7 @@ public class MedicalConsultationsService {
     private final ServiceUnitRepository serviceUnitRepository;
 
     @Autowired
-    public MedicalConsultationsService(
+    public MedicalConsultations(
             MedicalConsultationsRepository medicalConsultationRepository,
             PatientsRepository patientsRepository,
             ProfessionalsRepository professionalsRepository,

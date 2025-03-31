@@ -18,16 +18,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class RoomsOccupancyService {
+public class RoomsOccupancy {
 
     private final RoomsOccupancyRepository roomsOccupancyRepository;
     private final PatientsRepository patientsRepository;
     private final RoomsRepository roomsRepository;
 
     @Autowired
-    public RoomsOccupancyService(RoomsOccupancyRepository roomsOccupancyRepository,
-                                 PatientsRepository patientsRepository,
-                                 RoomsRepository roomsRepository) {
+    public RoomsOccupancy(RoomsOccupancyRepository roomsOccupancyRepository,
+                          PatientsRepository patientsRepository,
+                          RoomsRepository roomsRepository) {
         this.roomsOccupancyRepository = roomsOccupancyRepository;
         this.patientsRepository = patientsRepository;
         this.roomsRepository = roomsRepository;

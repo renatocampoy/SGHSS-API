@@ -21,10 +21,10 @@ import java.util.List;
 @Tag(name = "Unidades de Serviço", description = "Gerenciamento das unidades de atendimento médico e hospitalar")
 public class ServiceUnitController {
 
-    private final ServiceUnitService serviceUnitService;
+    private final ServiceUnit serviceUnit;
 
-    public ServiceUnitController(ServiceUnitService serviceUnitService) {
-        this.serviceUnitService = serviceUnitService;
+    public ServiceUnitController(ServiceUnit serviceUnit) {
+        this.serviceUnit = serviceUnit;
     }
 
     /**
@@ -46,7 +46,7 @@ public class ServiceUnitController {
             }
     )
     public ResponseEntity<ServiceUnitDto> createServiceUnit(@RequestBody ServiceUnitDto dto) {
-        ServiceUnitDto serviceUnit = serviceUnitService.createServiceUnit(dto);
+        ServiceUnitDto serviceUnit = this.serviceUnit.createServiceUnit(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(serviceUnit);
     }
 
@@ -67,7 +67,7 @@ public class ServiceUnitController {
             }
     )
     public ResponseEntity<ServiceUnitDto> getServiceUnitById(@PathVariable Long id) {
-        return serviceUnitService.getServiceUnitById(id)
+        return serviceUnit.getServiceUnitById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -92,7 +92,7 @@ public class ServiceUnitController {
             }
     )
     public ResponseEntity<ServiceUnitDto> updateServiceUnit(@PathVariable Long id, @RequestBody ServiceUnitDto dto) {
-        ServiceUnitDto updatedServiceUnit = serviceUnitService.updateServiceUnit(id, dto);
+        ServiceUnitDto updatedServiceUnit = serviceUnit.updateServiceUnit(id, dto);
         return ResponseEntity.ok(updatedServiceUnit);
     }
 
@@ -114,7 +114,7 @@ public class ServiceUnitController {
             }
     )
     public ResponseEntity<Void> deleteServiceUnit(@PathVariable Long id) {
-        serviceUnitService.deleteServiceUnit(id);
+        serviceUnit.deleteServiceUnit(id);
         return ResponseEntity.noContent().build();
     }
 
@@ -133,7 +133,7 @@ public class ServiceUnitController {
             }
     )
     public ResponseEntity<List<ServiceUnitDto>> listServiceUnits() {
-        List<ServiceUnitDto> serviceUnits = serviceUnitService.listServiceUnits();
+        List<ServiceUnitDto> serviceUnits = serviceUnit.listServiceUnits();
         return ResponseEntity.ok(serviceUnits);
     }
 }
